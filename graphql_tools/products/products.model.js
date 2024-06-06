@@ -36,11 +36,36 @@ function getAllProducts() {
 }
 
 function getProductById(id) {
-  console.log('id', id);
   return products.find((product) => product.id === id);
+}
+
+function productsByPrice(min, max) {
+  return products.filter(
+    (product) => product.price >= min && product.price <= max
+  );
+}
+
+function addProduct(description, price) {
+  const newProduct = {
+    id: String(products.length + 1),
+    description,
+    price,
+    reviews: [],
+  };
+  products.push(newProduct);
+  return newProduct;
+}
+
+function addReview(productId, review) {
+  const product = products.find((product) => product.id === productId);
+  product.reviews.push(review);
+  return review;
 }
 
 module.exports = {
   getAllProducts,
   getProductById,
+  productsByPrice,
+  addProduct,
+  addReview,
 };
